@@ -49,8 +49,15 @@ public class AuthFilter implements Filter {
         WebUser webUser = new WebUser();
         Map<String, Cookie> cookieMap = CookieUtil.readCookieToMap(servletRequest);
 
-        webUser.setUserId(Integer.valueOf(cookieMap.get(CommonCookieKeyEnum.LOGIN_ID.getValue()).getValue()));
+        if (cookieMap.get(CommonCookieKeyEnum.LOGIN_ID.getValue()) != null) {
+            webUser.setUserId(Long.valueOf(cookieMap.get(CommonCookieKeyEnum.LOGIN_ID.getValue()).getValue()));
+            return webUser;
+        }
 
+        /**
+         * 如果cookie中没有则从header中获取
+         */
+        webUser.setUserId(Long.valueOf(servletRequest.getHeader(CommonCookieKeyEnum.LOGIN_ID.getValue())));
         return webUser;
     }
 

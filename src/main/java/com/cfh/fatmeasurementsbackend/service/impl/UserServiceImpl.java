@@ -4,6 +4,7 @@ import com.cfh.fatmeasurementsbackend.constant.ResponseCodeEnum;
 import com.cfh.fatmeasurementsbackend.dao.domain.User;
 import com.cfh.fatmeasurementsbackend.dao.repository.UserRepository;
 import com.cfh.fatmeasurementsbackend.service.UserService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Service;
  * @Date: 2019/3/13
  */
 @Service
+@Slf4j
 public class UserServiceImpl implements UserService {
     @Autowired
     private UserRepository userRepository;
@@ -29,5 +31,14 @@ public class UserServiceImpl implements UserService {
         } else {
             return ResponseCodeEnum.PWD_ERROR;
         }
+    }
+
+    @Override
+    public User userRegister(String userName, String userPassword) {
+        User user = new User();
+        user.setUserName(userName);
+        user.setUserPassword(userPassword);
+
+        return userRepository.save(user);
     }
 }

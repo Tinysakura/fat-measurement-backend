@@ -9,7 +9,7 @@ import lombok.Data;
  */
 @Data
 public class WebUser {
-    private Integer userId;
+    private Long userId;
 
     private static ThreadLocal<WebUser> webUserThreadLocal = new ThreadLocal<WebUser>();
 
