@@ -1,6 +1,8 @@
 package com.cfh.fatmeasurementsbackend.dao.domain;
 
 import lombok.Data;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
 
 import javax.persistence.*;
 
@@ -17,9 +19,11 @@ public class User {
     @Column(name = "id")
     private Long id;
 
+    @CreatedDate
     @Column(name = "db_create_time")
     private Long dbCreateTime;
 
+    @LastModifiedDate
     @Column(name = "db_update_time")
     private Long dbUpdateTime;
 
