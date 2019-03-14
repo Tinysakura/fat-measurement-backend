@@ -10,3 +10,12 @@ spring:
     username: root
     password: 19981002520qq
     url: jdbc:mysql://localhost:3306/fat_measurements_backend?useSSL=false&characterEncoding=utf-8
+
+  # 上传文件总的最大值
+  servlet:
+    multipart:
+      max-request-size: 10MB
+  # 单个文件的最大值
+  servlet:
+    multipart:
+      max-file-size: 10MB
