@@ -7,7 +7,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * @Author: chenfeihao@corp.netease.com
  * @Date: 2019/3/13
  */
-
 public interface UserRepository extends JpaRepository<User, Long> {
     /**
      * 根据userName查找用户

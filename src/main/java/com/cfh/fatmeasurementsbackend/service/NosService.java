@@ -10,4 +10,6 @@ import java.io.InputStream;
 
 public interface NosService {
     String uploadHeadportrait2Nos(InputStream inputStream) throws IOException;
+
+    String uploadBUltrasonic2Nos(InputStream inputStream) throws IOException;
 }

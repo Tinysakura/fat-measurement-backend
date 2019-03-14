@@ -57,6 +57,23 @@ public class NosServiceImpl implements NosService {
         return generateNosFileUrl(nosBucketHeadportrait, fileName);
     }
 
+    @Override
+    public String uploadBUltrasonic2Nos(InputStream inputStream) throws IOException {
+        ObjectMetadata objectMetadata = new ObjectMetadata();
+        objectMetadata.setContentLength(inputStream.available());
+
+        /**
+         * 将B超文件放入对应的桶中
+         */
+        String fileName = String.valueOf(UUID.randomUUID()).concat(".BMP");
+        nosClient.putObject(nosBucketBUltrasonic, fileName, inputStream, objectMetadata);
+
+        /**
+         * 生成头B超文件下载url
+         */
+        return generateNosFileUrl(nosBucketBUltrasonic, fileName);
+    }
+
     private String generateNosFileUrl(String bucketName, String key) {
         GeneratePresignedUrlRequest generatePresignedUrlRequest = new GeneratePresignedUrlRequest(bucketName, key);
 
