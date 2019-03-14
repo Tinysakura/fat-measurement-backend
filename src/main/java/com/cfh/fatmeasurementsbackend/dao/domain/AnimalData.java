@@ -64,4 +64,10 @@ public class AnimalData {
     @Column(name = "data_animal_variety")
     private Integer animalVariety;
 
+    /**
+     * 该条数据是否已结果测量(测量完成的数据不能被修改)
+     */
+    @Column(name = "data_animal_draft")
+    private Integer animalDraft;
+
 }

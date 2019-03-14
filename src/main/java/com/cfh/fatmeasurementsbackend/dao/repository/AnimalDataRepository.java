@@ -12,4 +12,6 @@ import java.util.List;
 
 public interface AnimalDataRepository extends JpaRepository<AnimalData, Long> {
     List<AnimalData> getByUserId(Long userId);
+
+    AnimalData getById(Long id);
 }

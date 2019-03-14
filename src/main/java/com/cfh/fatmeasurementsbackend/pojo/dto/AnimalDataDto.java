@@ -27,4 +27,6 @@ public class AnimalDataDto {
     private Integer animalSex;
 
     private Integer animalVariety;
+
+    private Integer animalDraft;
 }

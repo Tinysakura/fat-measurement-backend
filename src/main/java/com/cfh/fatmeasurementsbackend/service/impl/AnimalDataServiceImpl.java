@@ -69,4 +69,14 @@ public class AnimalDataServiceImpl implements AnimalDataService {
 
         return animalDataDtoList;
     }
+
+    @Override
+    public AnimalDataDto getAnimalDataById(Long id) {
+        AnimalData animalData = animalDataRepository.getById(id);
+
+        AnimalDataDto animalDataDto = new AnimalDataDto();
+        BeanUtils.copyProperties(animalData, animalDataDto);
+
+        return animalDataDto;
+    }
 }

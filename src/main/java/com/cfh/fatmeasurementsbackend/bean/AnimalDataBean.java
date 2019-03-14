@@ -6,9 +6,7 @@ import com.cfh.fatmeasurementsbackend.constant.ResponseCodeEnum;
 import com.cfh.fatmeasurementsbackend.pojo.dto.AnimalDataFormDto;
 import com.cfh.fatmeasurementsbackend.service.AnimalDataService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * @Author: chenfeihao@corp.netease.com
@@ -31,6 +29,18 @@ public class AnimalDataBean {
         responseView.setCode(ResponseCodeEnum.OK.getCode());
         responseView.setMessage(ResponseCodeEnum.OK.getValue());
         responseView.setResult(animalDataService.submitAnimalDataForm(animalDataFormDto));
+
+        return responseView;
+    }
+
+    @GetMapping(value = "/c/query/animal/data")
+    public ResponseView getAnimalDataById(@RequestParam(value = "id") Long id) {
+        ResponseView responseView = new ResponseView();
+
+        responseView.setCode(ResponseCodeEnum.OK.getCode());
+        responseView.setMessage(ResponseCodeEnum.OK.getValue());
+
+        responseView.setResult(animalDataService.getAnimalDataById(id));
 
         return responseView;
     }

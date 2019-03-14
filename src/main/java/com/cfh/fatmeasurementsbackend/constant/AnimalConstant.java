@@ -52,6 +52,41 @@ public class AnimalConstant {
         }
     }
 
+    public enum AnimalDraftEnum {
+        /**
+         * 未测量
+         */
+        DRAFT(0, "未测量"),
+        /**
+         * 已测量
+         */
+        NOT_DRAFT(1, "已测量"),;
+
+        Integer code;
+        String description;
+
+        AnimalDraftEnum(Integer code, String description) {
+            this.code = code;
+            this.description = description;
+        }
+
+        public Integer getCode() {
+            return code;
+        }
+
+        public void setCode(Integer code) {
+            this.code = code;
+        }
+
+        public String getDescription() {
+            return description;
+        }
+
+        public void setDescription(String description) {
+            this.description = description;
+        }
+    }
+
     public enum AnimalSexEnum {
         /**
          * 公

@@ -14,4 +14,6 @@ public interface AnimalDataService {
     AnimalDataDto submitAnimalDataForm(AnimalDataFormDto animalDataFormDto);
 
     List<AnimalDataDto> getAnimalDataByUserId(Long userId);
+
+    AnimalDataDto getAnimalDataById(Long id);
 }
