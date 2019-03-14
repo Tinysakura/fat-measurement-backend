@@ -33,7 +33,7 @@ public class AnimalDataBean {
         return responseView;
     }
 
-    @GetMapping(value = "/c/query/animal/data")
+    @GetMapping(value = "/a/query/animal/data")
     public ResponseView getAnimalDataById(@RequestParam(value = "id") Long id) {
         ResponseView responseView = new ResponseView();
 
