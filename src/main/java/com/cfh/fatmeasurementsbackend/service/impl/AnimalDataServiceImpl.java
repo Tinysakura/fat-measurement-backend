@@ -12,6 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @Author: chenfeihao@corp.netease.com
@@ -50,5 +52,21 @@ public class AnimalDataServiceImpl implements AnimalDataService {
         BeanUtils.copyProperties(animalDataResult, animalDataDto);
 
         return animalDataDto;
+    }
+
+    @Override
+    public List<AnimalDataDto> getAnimalDataByUserId(Long userId) {
+        List<AnimalData> animalDataList = animalDataRepository.getByUserId(userId);
+
+        List<AnimalDataDto> animalDataDtoList = new ArrayList<>(16);
+
+        for (AnimalData animalData : animalDataList) {
+            AnimalDataDto animalDataDto = new AnimalDataDto();
+            BeanUtils.copyProperties(animalData, animalDataDto);
+
+            animalDataDtoList.add(animalDataDto);
+        }
+
+        return animalDataDtoList;
     }
 }
