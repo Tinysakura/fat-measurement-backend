@@ -34,6 +34,9 @@ public class AnimalData {
     @Column(name = "user_id")
     private Long userId;
 
+    @Column(name = "data_animal_nos_key")
+    private String nosKey;
+
     /**
      * B超图片地址
      */

@@ -2,6 +2,7 @@ package com.cfh.fatmeasurementsbackend.service;
 
 import com.cfh.fatmeasurementsbackend.pojo.dto.AnimalDataDto;
 import com.cfh.fatmeasurementsbackend.pojo.dto.AnimalDataFormDto;
+import com.cfh.fatmeasurementsbackend.pojo.dto.AnimalResultDto;
 
 import java.util.List;
 

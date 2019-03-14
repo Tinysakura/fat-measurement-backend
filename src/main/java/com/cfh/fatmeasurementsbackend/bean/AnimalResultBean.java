@@ -6,6 +6,7 @@ import com.cfh.fatmeasurementsbackend.constant.ResponseCodeEnum;
 import com.cfh.fatmeasurementsbackend.service.AnimalResultService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -25,6 +26,18 @@ public class AnimalResultBean {
         responseView.setCode(ResponseCodeEnum.OK.getCode());
         responseView.setMessage(ResponseCodeEnum.OK.getValue());
         responseView.setResult(animalResultService.getAnimalResultByUserId(webUser.getUserId()));
+
+        return responseView;
+    }
+
+
+    @GetMapping("/a/data/measure")
+    public ResponseView measureAnimalData(@RequestParam(value = "animalDataId") Long animalDataId) {
+        ResponseView responseView = new ResponseView();
+
+        responseView.setCode(ResponseCodeEnum.OK.getCode());
+        responseView.setMessage(ResponseCodeEnum.OK.getValue());
+        responseView.setResult(animalResultService.measureAnimalData(animalDataId));
 
         return responseView;
     }

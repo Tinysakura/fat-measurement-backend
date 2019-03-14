@@ -14,4 +14,6 @@ public interface AnimalResultService {
     AnimalResultDto getAnimalResultByAnimalDataId(Long animalDataId);
 
     List<AnimalDetailVo> getAnimalResultByUserId(Long userId);
+
+    AnimalResultDto measureAnimalData(Long animalDataId);
 }

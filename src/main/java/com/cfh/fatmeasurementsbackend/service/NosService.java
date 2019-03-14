@@ -2,6 +2,7 @@ package com.cfh.fatmeasurementsbackend.service;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Map;
 
 /**
  * @Author: chenfeihao@corp.netease.com
@@ -11,5 +12,5 @@ import java.io.InputStream;
 public interface NosService {
     String uploadHeadportrait2Nos(InputStream inputStream) throws IOException;
 
-    String uploadBUltrasonic2Nos(InputStream inputStream) throws IOException;
+    Map<String, String> uploadBUltrasonic2Nos(InputStream inputStream) throws IOException;
 }

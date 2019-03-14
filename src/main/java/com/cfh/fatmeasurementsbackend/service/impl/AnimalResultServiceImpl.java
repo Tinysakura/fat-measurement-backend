@@ -71,4 +71,10 @@ public class AnimalResultServiceImpl implements AnimalResultService {
 
         return animalDetailVoList;
     }
+
+    @Override
+    public AnimalResultDto measureAnimalData(Long animalDataId) {
+        // TODO
+        return null;
+    }
 }

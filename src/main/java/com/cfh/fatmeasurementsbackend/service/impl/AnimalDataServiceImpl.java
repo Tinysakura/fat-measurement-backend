@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @Author: chenfeihao@corp.netease.com
@@ -38,9 +39,13 @@ public class AnimalDataServiceImpl implements AnimalDataService {
          * 将表单中携带的B超数据上传到nos桶中
          */
         try {
-            String url = nosService.uploadBUltrasonic2Nos(animalDataFormDto.getAnimalBUltrasound().getInputStream());
+            Map<String, String> resultMap = nosService.uploadBUltrasonic2Nos(animalDataFormDto.getAnimalBUltrasound().getInputStream());
+            String url = resultMap.get("url");
+            String nosKey = resultMap.get("nos_key");
+
             log.info("B超文件上传成功:{}", url);
             animalData.setAnimalBUltrasound(url);
+            animalData.setNosKey(nosKey);
         } catch (IOException e) {
             e.printStackTrace();
             log.info("B超文件上传失败");

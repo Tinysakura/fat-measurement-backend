@@ -18,6 +18,8 @@ public class AnimalDataDto {
 
     private Long userId;
 
+    private String nosKey;
+
     private String animalBUltrasound;
 
     private String animalId;

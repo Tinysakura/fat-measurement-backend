@@ -13,6 +13,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 
 /**
@@ -58,7 +60,7 @@ public class NosServiceImpl implements NosService {
     }
 
     @Override
-    public String uploadBUltrasonic2Nos(InputStream inputStream) throws IOException {
+    public Map<String, String> uploadBUltrasonic2Nos(InputStream inputStream) throws IOException {
         ObjectMetadata objectMetadata = new ObjectMetadata();
         objectMetadata.setContentLength(inputStream.available());
 
@@ -71,7 +73,13 @@ public class NosServiceImpl implements NosService {
         /**
          * 生成头B超文件下载url
          */
-        return generateNosFileUrl(nosBucketBUltrasonic, fileName);
+        String url = generateNosFileUrl(nosBucketBUltrasonic, fileName);
+
+        Map<String, String> map = new HashMap<>(2);
+        map.put("nos_key", fileName);
+        map.put("url", url);
+
+        return map;
     }
 
     private String generateNosFileUrl(String bucketName, String key) {
