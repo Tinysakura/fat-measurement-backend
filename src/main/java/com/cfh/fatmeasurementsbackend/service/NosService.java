@@ -1,5 +1,6 @@
 package com.cfh.fatmeasurementsbackend.service;
 
+import java.io.IOException;
 import java.io.InputStream;
 
 /**
@@ -8,5 +9,5 @@ import java.io.InputStream;
  */
 
 public interface NosService {
-    String uploadFile2Nos(InputStream inputStream);
+    String uploadHeadportrait2Nos(InputStream inputStream) throws IOException;
 }

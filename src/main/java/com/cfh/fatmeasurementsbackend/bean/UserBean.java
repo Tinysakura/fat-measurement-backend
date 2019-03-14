@@ -58,7 +58,7 @@ public class UserBean {
         ResponseView responseView = new ResponseView();
 
         try {
-            String url = nosService.uploadFile2Nos(headportrait.getInputStream());
+            String url = nosService.uploadHeadportrait2Nos(headportrait.getInputStream());
             responseView.setCode(ResponseCodeEnum.OK.getCode());
             responseView.setMessage("上传成功");
             responseView.setResult(url);
