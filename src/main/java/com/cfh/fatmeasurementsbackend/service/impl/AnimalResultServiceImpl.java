@@ -7,6 +7,9 @@ import com.cfh.fatmeasurementsbackend.pojo.dto.AnimalResultDto;
 import com.cfh.fatmeasurementsbackend.pojo.vo.AnimalDetailVo;
 import com.cfh.fatmeasurementsbackend.service.AnimalDataService;
 import com.cfh.fatmeasurementsbackend.service.AnimalResultService;
+import com.cfh.fatmeasurementsbackend.service.NosService;
+import com.netease.cloud.services.nos.transfer.Download;
+import com.netease.cloud.services.nos.transfer.TransferManager;
 import com.sun.javafx.binding.StringFormatter;
 import lombok.extern.slf4j.Slf4j;
 import org.redisson.api.RLock;
@@ -25,7 +28,7 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.Callable;
+import java.util.UUID;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
@@ -50,6 +53,9 @@ public class AnimalResultServiceImpl implements AnimalResultService {
      */
     @Autowired
     private RedissonClient redissonClient;
+
+    @Autowired
+    private NosService nosService;
 
     private static String resourcePath = System.getProperty("user.dir");
 
@@ -104,11 +110,20 @@ public class AnimalResultServiceImpl implements AnimalResultService {
     public AnimalResultDto measureAnimalData(Long animalDataId) {
         String lockKey = StringFormatter.format(distributedKeyFormat, animalDataId).getValue();
 
-        String bmp = null;
-
         /**
          * 从nos将b超文件下载到本地，测量完成之后删除
+         * b超文件名为对应的nos-key加上uuid, 后缀为BMP, 统一保存在py文件所在路径的下级bmp路径下
          */
+        AnimalDataDto animalData = animalDataService.getAnimalDataById(animalDataId);
+        String bmp = animalData.getNosKey().concat(String.valueOf(UUID.randomUUID()));
+        String downloadPath = resourcePath.concat("/src/main/resources/py/bmp").concat(bmp).concat(".BMP");
+        try {
+            log.info("将{}对应的B超文件下载到临时目录", animalDataId, downloadPath);
+            nosService.downloadBUltrasonicFromNos(downloadPath, animalData.getNosKey());
+        } catch (IOException e) {
+            log.info("{}对应的B超文件下载失败", animalDataId);
+            e.printStackTrace();
+        }
 
         AnimalResultDto result = executorWithLock(lockKey, e -> {
             AnimalResultDto animalResultDto = new AnimalResultDto();
@@ -150,6 +165,17 @@ public class AnimalResultServiceImpl implements AnimalResultService {
 
             return animalResultDto;
         });
+
+        /**
+         * 删除临时目录下下载的B超文件
+         */
+        try {
+            log.info("删除临时目录下的B超文件{}", downloadPath);
+            File file = new File(downloadPath);
+            file.delete();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         return result;
     }

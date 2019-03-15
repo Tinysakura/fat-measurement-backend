@@ -4,13 +4,17 @@ import com.cfh.fatmeasurementsbackend.service.NosService;
 import com.netease.cloud.services.nos.NosClient;
 import com.netease.cloud.services.nos.model.GeneratePresignedUrlRequest;
 import com.netease.cloud.services.nos.model.ObjectMetadata;
+import com.netease.cloud.services.nos.transfer.Download;
+import com.netease.cloud.services.nos.transfer.TransferManager;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.lang.reflect.Field;
 import java.net.URL;
 import java.util.Date;
 import java.util.HashMap;
@@ -26,6 +30,9 @@ import java.util.UUID;
 public class NosServiceImpl implements NosService {
     @Resource(name = "nosClient")
     private NosClient nosClient;
+
+    @Resource(name = "transferManager")
+    private TransferManager transferManager;
 
     /**
      * 存储用户头像的文件桶
@@ -80,6 +87,21 @@ public class NosServiceImpl implements NosService {
         map.put("url", url);
 
         return map;
+    }
+
+    @Override
+    public void downloadBUltrasonicFromNos(String downloadPath, String nosKey) throws IOException {
+        File file = new File(downloadPath);
+        Download download = transferManager.download(nosBucketBUltrasonic, nosKey, file);
+
+        /**
+         * 下载完成前阻塞调用线程
+         */
+        try {
+            download.waitForCompletion();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     private String generateNosFileUrl(String bucketName, String key) {

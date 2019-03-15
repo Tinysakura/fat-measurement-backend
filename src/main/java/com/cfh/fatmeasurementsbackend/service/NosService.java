@@ -13,4 +13,6 @@ public interface NosService {
     String uploadHeadportrait2Nos(InputStream inputStream) throws IOException;
 
     Map<String, String> uploadBUltrasonic2Nos(InputStream inputStream) throws IOException;
+
+    void downloadBUltrasonicFromNos(String downloadPath, String nosKey) throws IOException;
 }
