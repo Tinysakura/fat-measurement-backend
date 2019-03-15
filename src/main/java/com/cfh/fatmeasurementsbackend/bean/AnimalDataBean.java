@@ -19,9 +19,9 @@ public class AnimalDataBean {
     private AnimalDataService animalDataService;
 
     @PostMapping(value = "/a/submit/form/animal/data")
-    public ResponseView saveAnimalDataForm(@RequestBody AnimalDataFormDto animalDataFormDto,
-                                           WebUser webUser) {
+    public ResponseView saveAnimalDataForm(@RequestBody AnimalDataFormDto animalDataFormDto) {
 
+        WebUser webUser = WebUser.getWebUser();
         animalDataFormDto.setUserId(webUser.getUserId());
 
         ResponseView responseView = new ResponseView();

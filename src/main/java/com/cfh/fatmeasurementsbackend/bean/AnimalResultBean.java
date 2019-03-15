@@ -20,7 +20,8 @@ public class AnimalResultBean {
     private AnimalResultService animalResultService;
 
     @GetMapping("/a/query/fat/analyze/result")
-    public ResponseView queryFatAnalyzeResult(WebUser webUser) {
+    public ResponseView queryFatAnalyzeResult() {
+        WebUser webUser = WebUser.getWebUser();
         ResponseView responseView = new ResponseView();
 
         responseView.setCode(ResponseCodeEnum.OK.getCode());
