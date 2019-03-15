@@ -23,3 +23,7 @@ spring:
   redis:
     host: localhost
     port: 6379
+
+nos_accessKey: ****
+nos_secretKey: ****
+nos_endPoint: nos-eastchina1.126.net

@@ -21,14 +21,11 @@ public class RedissionConfiguration {
     @Value("${spring.redis.port}")
     private String port;
 
-    @Value("${spring.redis.password}")
-    private String password;
-
     @Bean
     public RedissonClient getRedisson(){
 
         Config config = new Config();
-        config.useSingleServer().setAddress("redis://" + host + ":" + port).setPassword(password);
+        config.useSingleServer().setAddress("redis://" + host + ":" + port);
         // 添加主从配置
         // config.useMasterSlaveServers().setMasterAddress("").setPassword("").addSlaveAddress(new String[]{"",""});
 
