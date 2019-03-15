@@ -210,7 +210,7 @@ public class AnimalResultServiceImpl implements AnimalResultService {
         log.info("resourcePath:{}", resourcePath);
 
         try {
-            invokeExternal(new String[]{"/bin/sh", "-c", "HelloWorld.py"});
+            invokeExternal(new String[]{"./test.sh"});
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -218,7 +218,7 @@ public class AnimalResultServiceImpl implements AnimalResultService {
 
     private String invokeExternal(String[] command) throws IOException {
         // 改变当前目录执行shell脚本
-        Process process = Runtime.getRuntime().exec(command, null, new File(resourcePath.concat("/py")));
+        Process process = Runtime.getRuntime().exec(command, null, new File(resourcePath.concat("/src/main/resources/py")));
         InputStreamReader inputStreamReader = new InputStreamReader(process.getInputStream());
         BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
 
