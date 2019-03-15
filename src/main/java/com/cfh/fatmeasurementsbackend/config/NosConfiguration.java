@@ -1,10 +1,10 @@
 package com.cfh.fatmeasurementsbackend.config;
 
 import com.netease.cloud.ClientConfiguration;
-import com.netease.cloud.Protocol;
 import com.netease.cloud.auth.BasicCredentials;
 import com.netease.cloud.auth.Credentials;
 import com.netease.cloud.services.nos.NosClient;
+import com.netease.cloud.services.nos.transfer.TransferManager;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -15,7 +15,7 @@ import org.springframework.context.annotation.Configuration;
  * @Date: 2019/3/14
  */
 @Configuration
-public class NosClientConfiguration {
+public class NosConfiguration {
 
     @Value("${nos.accessKey}")
     private String nosAccessKey;
@@ -43,6 +43,13 @@ public class NosClientConfiguration {
         nosClient.setEndpoint(endPoint);
 
         return nosClient;
+    }
+
+    @Bean("transferManager")
+    public TransferManager transferManager() {
+        TransferManager transferManager = new TransferManager(nosClient());
+
+        return transferManager;
     }
 
 }

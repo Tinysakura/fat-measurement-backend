@@ -15,7 +15,7 @@ import java.util.Map;
  * @Date: 2019/3/14
  */
 @Configuration
-public class FilterConfigurationLoader {
+public class FilterConfiguration {
 
     @Bean
     public AuthFilter authFilterRegistration() {
