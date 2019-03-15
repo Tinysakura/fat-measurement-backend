@@ -205,7 +205,8 @@ public class AnimalResultServiceImpl implements AnimalResultService {
         }
     }
 
-    private void testInvokeExternal() {
+    @Override
+    public void testInvokeExternal() {
         log.info("resourcePath:{}", resourcePath);
 
         try {

@@ -16,4 +16,6 @@ public interface AnimalResultService {
     List<AnimalDetailVo> getAnimalResultByUserId(Long userId);
 
     AnimalResultDto measureAnimalData(Long animalDataId);
+
+    void testInvokeExternal();
 }
