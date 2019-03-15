@@ -32,13 +32,13 @@ public class NosServiceImpl implements NosService {
      * @param inputStream
      * @return
      */
-    @Value("${nos_bucket_head_portrait}")
+    @Value("${nos.bucket_head_portrait}")
     String nosBucketHeadportrait;
 
     /**
      * 存储B超图像的文件桶
      */
-    @Value("${nos_bucket_B_ultrasonic}")
+    @Value("${nos.bucket_B_ultrasonic}")
     String nosBucketBUltrasonic;
 
 

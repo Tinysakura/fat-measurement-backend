@@ -17,13 +17,13 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class NosClientConfiguration {
 
-    @Value("${nos_accessKey}")
+    @Value("${nos.accessKey}")
     private String nosAccessKey;
 
-    @Value("${nos_secretKey}")
+    @Value("${nos.secretKey}")
     private String nosSecretKey;
 
-    @Value(("${nos_endPoint}"))
+    @Value(("${nos.endPoint}"))
     private String endPoint;
 
 

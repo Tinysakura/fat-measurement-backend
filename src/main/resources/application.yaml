@@ -1,3 +1,13 @@
+nos:
+  accessKey: dev
+  secretKey: dev
+  endPoint: nos-eastchina1.126.net
+  bucket_head_portrait: bucket-head-portrait
+  bucket_B_ultrasonic: bucket-B-ultrasonic
+
+normal_corePoolSize: 10
+normal_maxPoolSize: 50
+
 spring:
   application:
     name: fat-measurements-backend
@@ -15,15 +25,8 @@ spring:
   servlet:
     multipart:
       max-request-size: 10MB
-  # 单个文件的最大值
-  servlet:
-    multipart:
       max-file-size: 10MB
 
   redis:
     host: localhost
     port: 6379
-
-nos_accessKey: ****
-nos_secretKey: ****
-nos_endPoint: nos-eastchina1.126.net
