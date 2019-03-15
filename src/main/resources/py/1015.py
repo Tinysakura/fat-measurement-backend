@@ -54,7 +54,8 @@ def __CNN__():
     return model
 model1 = __CNN__()
 model1.load_weights('CNN_model_final.h5')
-imageData = cv2.imread('2018Jun16-17.03.14.jpg')
+#imageData = cv2.imread('2018Jun16-17.03.14.jpg')
+imageData = cv2.imread(sys.argv[1])
 #imageData = cv2.resize(imageData,254,309,3)
 imageData = np.asarray(imageData)
 #print('img.shape', imageData.shape)

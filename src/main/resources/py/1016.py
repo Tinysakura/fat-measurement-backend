@@ -55,7 +55,8 @@ def __CNN__():
     return model
 model1 = __CNN__()
 model1.load_weights('CNN_model_final3.h5')
-imageData = cv2.imread('ACB88.BMP')
+#imageData = cv2.imread('ACB88.BMP')
+imageData = cv2.imread(sys.argv[1])
 imageData = np.asarray(imageData)
 #print('img.shape', imageData.shape)
 height = len(imageData)
