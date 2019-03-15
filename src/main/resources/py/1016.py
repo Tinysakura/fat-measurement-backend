@@ -10,6 +10,7 @@ import cv2
 import tensorflow as tf
 import numpy as np
 import os
+import sys
 
 def __CNN__():
     model = Sequential()#218*178*3

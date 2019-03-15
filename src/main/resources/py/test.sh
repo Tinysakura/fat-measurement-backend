@@ -1,3 +1,3 @@
 # !/bin/sh
 
-python HelloWorld.py
+python test.py $1

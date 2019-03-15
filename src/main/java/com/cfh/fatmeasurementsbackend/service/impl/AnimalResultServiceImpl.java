@@ -160,7 +160,7 @@ public class AnimalResultServiceImpl implements AnimalResultService {
      */
     private BigDecimal measureMusculiOculi(String bmp) {
         String bmpFilePath = "./bmp/".concat(bmp);
-        String[] command = new String[]{"/bin/sh", "-c", "python 1015.py ".concat(bmpFilePath)};
+        String[] command = new String[]{"./1015.sh", "bmpFilePath"};
 
         try {
             return new BigDecimal(invokeExternal(command));
@@ -177,7 +177,7 @@ public class AnimalResultServiceImpl implements AnimalResultService {
      */
     private BigDecimal measureBackFat(String bmp) {
         String bmpFilePath = "./bmp/".concat(bmp);
-        String[] command = new String[]{"/bin/sh", "-c", "python 1016.py ".concat(bmpFilePath)};
+        String[] command = new String[]{"./1016.sh", bmpFilePath};
 
         try {
             return new BigDecimal(invokeExternal(command));
@@ -194,7 +194,7 @@ public class AnimalResultServiceImpl implements AnimalResultService {
      */
     private BigDecimal measureFatRate(String bmp) {
         String bmpFilePath = "./bmp/".concat(bmp);
-        String[] command = new String[]{"/bin/sh", "-c", "python 1017.py ".concat(bmpFilePath)};
+        String[] command = new String[]{"./1017.sh", bmpFilePath};
 
         try {
             return new BigDecimal(invokeExternal(command));
@@ -210,7 +210,7 @@ public class AnimalResultServiceImpl implements AnimalResultService {
         log.info("resourcePath:{}", resourcePath);
 
         try {
-            invokeExternal(new String[]{"./test.sh"});
+            invokeExternal(new String[]{"./test.sh", "陈飞豪"});
         } catch (IOException e) {
             e.printStackTrace();
         }
