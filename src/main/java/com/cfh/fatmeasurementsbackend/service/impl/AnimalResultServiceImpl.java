@@ -8,13 +8,18 @@ import com.cfh.fatmeasurementsbackend.pojo.vo.AnimalDetailVo;
 import com.cfh.fatmeasurementsbackend.service.AnimalDataService;
 import com.cfh.fatmeasurementsbackend.service.AnimalResultService;
 import lombok.extern.slf4j.Slf4j;
+import org.redisson.api.RedissonClient;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Consumer;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 /**
@@ -29,6 +34,12 @@ public class AnimalResultServiceImpl implements AnimalResultService {
 
     @Autowired
     private AnimalDataService animalDataService;
+
+    @Autowired
+    private RedissonClient redissonClient;
+
+    @Resource(name = "normalThreadPoolTaskExecutor")
+    private ThreadPoolTaskExecutor threadPoolTaskExecutor;
 
     @Override
     public AnimalResultDto getAnimalResultByAnimalDataId(Long animalDataId) {
@@ -76,5 +87,9 @@ public class AnimalResultServiceImpl implements AnimalResultService {
     public AnimalResultDto measureAnimalData(Long animalDataId) {
         // TODO
         return null;
+    }
+
+    private void executorWithLock(String lockKey, Consumer consumer) {
+
     }
 }
