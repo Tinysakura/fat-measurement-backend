@@ -2,13 +2,11 @@ package com.cfh.fatmeasurementsbackend.bean;
 
 import com.cfh.fatmeasurementsbackend.common.ResponseView;
 import com.cfh.fatmeasurementsbackend.constant.ResponseCodeEnum;
+import com.cfh.fatmeasurementsbackend.pojo.dto.UserDto;
 import com.cfh.fatmeasurementsbackend.service.NosService;
 import com.cfh.fatmeasurementsbackend.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
@@ -44,11 +42,10 @@ public class UserBean {
     }
 
     @PostMapping(value = "/a/register")
-    public ResponseView register(@RequestParam(value = "userName") String userName,
-                                 @RequestParam(value = "userPassword") String userPassword) {
+    public ResponseView register(@RequestBody UserDto userDto) {
         ResponseView responseView = new ResponseView();
         responseView.setCode(ResponseCodeEnum.OK.getCode());
-        responseView.setResult(userService.userRegister(userName, userPassword));
+        responseView.setResult(userService.userRegister(userDto.getUserName(), userDto.getUserPassword()));
 
         return responseView;
     }
