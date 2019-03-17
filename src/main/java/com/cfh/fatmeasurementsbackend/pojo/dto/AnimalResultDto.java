@@ -1,12 +1,14 @@
 package com.cfh.fatmeasurementsbackend.pojo.dto;
 
+import lombok.Data;
+
 import java.math.BigDecimal;
 
 /**
  * @Author: chenfeihao@corp.netease.com
  * @Date: 2019/3/14
  */
-
+@Data
 public class AnimalResultDto {
     private Long id;
 
