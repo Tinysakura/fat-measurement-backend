@@ -1,6 +1,6 @@
 nos:
-  accessKey: dev
-  secretKey: dev
+  accessKey: 32af146fa7c0457fbe4345a98cc753ca
+  secretKey: 16a9afdc8e5b4ac4bd483f2c75eb2fc0
   endPoint: nos-eastchina1.126.net
   bucket_head_portrait: bucket-head-portrait
   bucket_B_ultrasonic: bucket-B-ultrasonic
