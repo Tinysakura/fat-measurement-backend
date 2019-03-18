@@ -68,4 +68,12 @@ public class UserServiceImpl implements UserService {
 
         return userDto;
     }
+
+    @Override
+    public void updateUserHeadPortrait(String url, Long id) {
+        User oldUser = userRepository.findById(id).get();
+        oldUser.setUserHeadPortrait(url);
+
+        userRepository.save(oldUser);
+    }
 }

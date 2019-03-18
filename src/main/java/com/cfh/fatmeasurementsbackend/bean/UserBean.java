@@ -1,6 +1,7 @@
 package com.cfh.fatmeasurementsbackend.bean;
 
 import com.cfh.fatmeasurementsbackend.common.ResponseView;
+import com.cfh.fatmeasurementsbackend.common.WebUser;
 import com.cfh.fatmeasurementsbackend.constant.ResponseCodeEnum;
 import com.cfh.fatmeasurementsbackend.pojo.dto.UserDto;
 import com.cfh.fatmeasurementsbackend.service.NosService;
@@ -53,6 +54,9 @@ public class UserBean {
             responseView.setCode(ResponseCodeEnum.OK.getCode());
             responseView.setMessage("上传成功");
             responseView.setResult(url);
+
+            WebUser webUser = WebUser.getWebUser();
+            userService.updateUserHeadPortrait(url, webUser.getUserId());
         } catch (IOException e) {
             e.printStackTrace();
             responseView.setCode(ResponseCodeEnum.ERROR.getCode());

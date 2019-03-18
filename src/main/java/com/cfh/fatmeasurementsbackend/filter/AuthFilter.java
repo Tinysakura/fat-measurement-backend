@@ -22,7 +22,7 @@ import java.util.Map;
 
 public class AuthFilter implements Filter {
 
-    private static String[] noNeedLoginURL = {"/a/login"};
+    private static String[] noNeedLoginURL = {"/a/login", "/a/register", "/a/get/headportrait"};
 
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {

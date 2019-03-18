@@ -14,4 +14,6 @@ public interface UserService {
     UserDto userRegister(String userName, String userPassword);
 
     UserDto queryUserByUserName(String userName);
+
+    void updateUserHeadPortrait(String url, Long id);
 }
