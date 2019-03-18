@@ -1,7 +1,5 @@
 package com.cfh.fatmeasurementsbackend.constant;
 
-import lombok.Data;
-
 /**
  * 通用的cookie键枚举
  *
