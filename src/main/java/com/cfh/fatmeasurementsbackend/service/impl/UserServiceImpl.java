@@ -64,6 +64,10 @@ public class UserServiceImpl implements UserService {
         UserDto userDto = new UserDto();
         User user = userRepository.findByUserName(userName);
 
+        if (user == null) {
+            return userDto;
+        }
+
         BeanUtils.copyProperties(user, userDto);
 
         return userDto;
