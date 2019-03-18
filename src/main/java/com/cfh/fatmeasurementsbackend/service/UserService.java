@@ -1,6 +1,6 @@
 package com.cfh.fatmeasurementsbackend.service;
 
-import com.cfh.fatmeasurementsbackend.constant.ResponseCodeEnum;
+import com.cfh.fatmeasurementsbackend.common.ResponseView;
 import com.cfh.fatmeasurementsbackend.dao.domain.User;
 
 /**
@@ -8,7 +8,7 @@ import com.cfh.fatmeasurementsbackend.dao.domain.User;
  * @Date: 2019/3/13
  */
 public interface UserService {
-    ResponseCodeEnum loginAuth(String userName, String userPassword);
+    ResponseView loginAuth(String userName, String userPassword);
 
     User userRegister(String userName, String userPassword);
 }

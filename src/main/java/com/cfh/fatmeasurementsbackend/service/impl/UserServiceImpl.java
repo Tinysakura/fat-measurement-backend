@@ -1,5 +1,6 @@
 package com.cfh.fatmeasurementsbackend.service.impl;
 
+import com.cfh.fatmeasurementsbackend.common.ResponseView;
 import com.cfh.fatmeasurementsbackend.constant.ResponseCodeEnum;
 import com.cfh.fatmeasurementsbackend.dao.domain.User;
 import com.cfh.fatmeasurementsbackend.dao.repository.UserRepository;
@@ -19,18 +20,25 @@ public class UserServiceImpl implements UserService {
     private UserRepository userRepository;
 
     @Override
-    public ResponseCodeEnum loginAuth(String userName, String userPassword) {
+    public ResponseView loginAuth(String userName, String userPassword) {
         User loginUser = userRepository.findByUserName(userName);
+        ResponseView<User> responseView = new ResponseView<>();
 
         if (loginUser == null) {
-            return ResponseCodeEnum.NO_USER;
+            responseView.setCode(ResponseCodeEnum.NO_USER.getCode());
+            responseView.setMessage(ResponseCodeEnum.NO_USER.getValue());
         }
 
         if (loginUser.getUserPassword().equals(userPassword)) {
-            return ResponseCodeEnum.OK;
+            responseView.setCode(ResponseCodeEnum.OK.getCode());
+            responseView.setMessage(ResponseCodeEnum.OK.getValue());
+            responseView.setResult(loginUser);
         } else {
-            return ResponseCodeEnum.PWD_ERROR;
+            responseView.setCode(ResponseCodeEnum.PWD_ERROR.getCode());
+            responseView.setMessage(ResponseCodeEnum.PWD_ERROR.getValue());
         }
+
+        return responseView;
     }
 
     @Override

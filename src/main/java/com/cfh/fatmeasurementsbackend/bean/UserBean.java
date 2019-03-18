@@ -30,13 +30,7 @@ public class UserBean {
         ResponseView<ResponseView> responseView = new ResponseView<>();
 
         responseView.setCode(ResponseCodeEnum.OK.getCode());
-
-        ResponseCodeEnum responseCodeEnum = userService.loginAuth(userName, userPassword);
-        ResponseView result = new ResponseView();
-        result.setCode(responseCodeEnum.getCode());
-        result.setMessage(responseCodeEnum.getValue());
-
-        responseView.setResult(result);
+        responseView.setResult(userService.loginAuth(userName, userPassword));
 
         return responseView;
     }
