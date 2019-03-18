@@ -61,4 +61,15 @@ public class UserBean {
 
         return responseView;
     }
+
+    @GetMapping(value = "/a/get/headportrait")
+    public ResponseView getUserHeadPortrait(@RequestParam(value = "userName")String userName) {
+        ResponseView responseView = new ResponseView();
+
+        responseView.setCode(ResponseCodeEnum.OK.getCode());
+        responseView.setMessage(ResponseCodeEnum.OK.getValue());
+        responseView.setResult(userService.queryUserByUserName(userName).getUserHeadPortrait());
+
+        return responseView;
+    }
 }

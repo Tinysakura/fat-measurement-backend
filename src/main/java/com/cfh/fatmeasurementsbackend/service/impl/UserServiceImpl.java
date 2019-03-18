@@ -9,6 +9,7 @@ import com.cfh.fatmeasurementsbackend.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
 
 /**
@@ -46,11 +47,25 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User userRegister(String userName, String userPassword) {
+    public UserDto userRegister(String userName, String userPassword) {
         User user = new User();
         user.setUserName(userName);
         user.setUserPassword(userPassword);
 
-        return userRepository.save(user);
+        User result = userRepository.save(user);
+        UserDto userDto = new UserDto();
+        BeanUtils.copyProperties(result, userDto);
+
+        return userDto;
+    }
+
+    @Override
+    public UserDto queryUserByUserName(String userName) {
+        UserDto userDto = new UserDto();
+        User user = userRepository.findByUserName(userName);
+
+        BeanUtils.copyProperties(user, userDto);
+
+        return userDto;
     }
 }
