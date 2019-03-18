@@ -4,8 +4,10 @@ import com.cfh.fatmeasurementsbackend.common.ResponseView;
 import com.cfh.fatmeasurementsbackend.constant.ResponseCodeEnum;
 import com.cfh.fatmeasurementsbackend.dao.domain.User;
 import com.cfh.fatmeasurementsbackend.dao.repository.UserRepository;
+import com.cfh.fatmeasurementsbackend.pojo.dto.UserDto;
 import com.cfh.fatmeasurementsbackend.service.UserService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,7 +24,9 @@ public class UserServiceImpl implements UserService {
     @Override
     public ResponseView loginAuth(String userName, String userPassword) {
         User loginUser = userRepository.findByUserName(userName);
-        ResponseView<User> responseView = new ResponseView<>();
+        UserDto userDto = new UserDto();
+        BeanUtils.copyProperties(loginUser, userDto);
+        ResponseView<UserDto> responseView = new ResponseView<>();
 
         if (loginUser == null) {
             responseView.setCode(ResponseCodeEnum.NO_USER.getCode());
@@ -32,7 +36,7 @@ public class UserServiceImpl implements UserService {
         if (loginUser.getUserPassword().equals(userPassword)) {
             responseView.setCode(ResponseCodeEnum.OK.getCode());
             responseView.setMessage(ResponseCodeEnum.OK.getValue());
-            responseView.setResult(loginUser);
+            responseView.setResult(userDto);
         } else {
             responseView.setCode(ResponseCodeEnum.PWD_ERROR.getCode());
             responseView.setMessage(ResponseCodeEnum.PWD_ERROR.getValue());
