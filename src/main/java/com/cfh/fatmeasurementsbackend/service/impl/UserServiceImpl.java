@@ -26,13 +26,16 @@ public class UserServiceImpl implements UserService {
     public ResponseView loginAuth(String userName, String userPassword) {
         User loginUser = userRepository.findByUserName(userName);
         UserDto userDto = new UserDto();
-        BeanUtils.copyProperties(loginUser, userDto);
+
         ResponseView<UserDto> responseView = new ResponseView<>();
 
         if (loginUser == null) {
             responseView.setCode(ResponseCodeEnum.NO_USER.getCode());
             responseView.setMessage(ResponseCodeEnum.NO_USER.getValue());
+            return responseView;
         }
+
+        BeanUtils.copyProperties(loginUser, userDto);
 
         if (loginUser.getUserPassword().equals(userPassword)) {
             responseView.setCode(ResponseCodeEnum.OK.getCode());
