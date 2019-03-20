@@ -29,10 +29,10 @@ public class User {
     @Column(name = "db_update_time")
     private Long dbUpdateTime;
 
-    @Column(name = "user_name")
+    @Column(name = "user_name", columnDefinition = "VARCHAR")
     private String userName;
 
-    @Column(name = "user_password")
+    @Column(name = "user_password", columnDefinition = "VARCHAR")
     private String userPassword;
 
     @Column(name = "user_head_portrait")
