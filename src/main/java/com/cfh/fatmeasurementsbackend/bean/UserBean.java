@@ -76,4 +76,16 @@ public class UserBean {
 
         return responseView;
     }
+
+    @PostMapping(value = "/a/update/user/info")
+    public ResponseView updateUserInfo(@RequestBody UserDto userDto) {
+        ResponseView responseView = new ResponseView();
+
+        responseView.setCode(ResponseCodeEnum.OK.getCode());
+        responseView.setMessage(ResponseCodeEnum.OK.getValue());
+
+        userService.updateUserInfo(userDto);
+
+        return responseView;
+    }
 }

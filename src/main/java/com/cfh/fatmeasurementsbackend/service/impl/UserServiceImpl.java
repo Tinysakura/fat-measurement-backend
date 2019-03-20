@@ -83,4 +83,12 @@ public class UserServiceImpl implements UserService {
 
         userRepository.save(oldUser);
     }
+
+    @Override
+    public void updateUserInfo(UserDto userDto) {
+        User user = new User();
+        BeanUtils.copyProperties(userDto, user);
+
+        userRepository.save(user);
+    }
 }

@@ -16,4 +16,6 @@ public interface UserService {
     UserDto queryUserByUserName(String userName);
 
     void updateUserHeadPortrait(String url, Long id);
+
+    void updateUserInfo(UserDto userDto);
 }
