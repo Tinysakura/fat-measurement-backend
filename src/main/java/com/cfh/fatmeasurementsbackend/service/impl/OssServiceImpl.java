@@ -34,7 +34,7 @@ public class OssServiceImpl implements OssService {
     /**
      * 存储B超图像的文件桶
      */
-    @Value("${nos.bucket_b_ultrasonic}")
+    @Value("${oss.bucket_B_ultrasonic}")
     String ossBucketBUltrasonic;
 
     @Value(("${oss.endPoint}"))
