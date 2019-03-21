@@ -34,19 +34,19 @@ public class AnimalData {
     @Column(name = "user_id")
     private Long userId;
 
-    @Column(name = "data_animal_nos_key")
+    @Column(name = "data_animal_nos_key", columnDefinition = "VARCHAR")
     private String nosKey;
 
     /**
      * B超图片地址
      */
-    @Column(name = "data_animal_b_ultrasound")
+    @Column(name = "data_animal_b_ultrasound", columnDefinition = "VARCHAR")
     private String animalBUltrasound;
 
     /**
      * 测量动物编号
      */
-    @Column(name = "data_animal_id")
+    @Column(name = "data_animal_id", columnDefinition = "VARCHAR")
     private String animalId;
 
     /**

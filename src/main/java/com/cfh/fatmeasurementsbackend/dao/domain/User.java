@@ -35,7 +35,7 @@ public class User {
     @Column(name = "user_password", columnDefinition = "VARCHAR")
     private String userPassword;
 
-    @Column(name = "user_head_portrait")
+    @Column(name = "user_head_portrait", columnDefinition = "VARCHAR")
     private String userHeadPortrait;
 
 }

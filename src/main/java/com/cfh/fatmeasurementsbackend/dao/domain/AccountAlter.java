@@ -40,6 +40,6 @@ public class AccountAlter {
     @Column(name = "account_alter_amount")
     private BigDecimal accountAlterAmount;
 
-    @Column(name = "account_alter_comment")
+    @Column(name = "account_alter_comment", columnDefinition = "VARCHAR")
     private String accountAlterComment;
 }
