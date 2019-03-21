@@ -5,6 +5,7 @@ import com.cfh.fatmeasurementsbackend.common.WebUser;
 import com.cfh.fatmeasurementsbackend.constant.ResponseCodeEnum;
 import com.cfh.fatmeasurementsbackend.pojo.dto.UserDto;
 import com.cfh.fatmeasurementsbackend.service.NosService;
+import com.cfh.fatmeasurementsbackend.service.OssService;
 import com.cfh.fatmeasurementsbackend.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -22,8 +23,11 @@ public class UserBean {
     @Autowired
     private UserService userService;
 
+//    @Autowired
+//    private NosService nosService;
+
     @Autowired
-    private NosService nosService;
+    private OssService ossService;
 
     @GetMapping(value = "/a/login")
     public ResponseView login(@RequestParam(value = "userName") String userName,
@@ -50,7 +54,7 @@ public class UserBean {
         ResponseView responseView = new ResponseView();
 
         try {
-            String url = nosService.uploadHeadportrait2Nos(headportrait.getInputStream());
+            String url = ossService.uploadHeadportrait2Oss(headportrait.getInputStream());
             responseView.setCode(ResponseCodeEnum.OK.getCode());
             responseView.setMessage("上传成功");
             responseView.setResult(url);

@@ -14,7 +14,6 @@ import javax.annotation.Resource;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
-import java.lang.reflect.Field;
 import java.net.URL;
 import java.util.Date;
 import java.util.HashMap;
@@ -36,8 +35,6 @@ public class NosServiceImpl implements NosService {
 
     /**
      * 存储用户头像的文件桶
-     * @param inputStream
-     * @return
      */
     @Value("${nos.bucket_head_portrait}")
     String nosBucketHeadportrait;

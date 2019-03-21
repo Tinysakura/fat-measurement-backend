@@ -6,6 +6,7 @@ import com.cfh.fatmeasurementsbackend.pojo.dto.AnimalDataDto;
 import com.cfh.fatmeasurementsbackend.pojo.dto.AnimalDataFormDto;
 import com.cfh.fatmeasurementsbackend.service.AnimalDataService;
 import com.cfh.fatmeasurementsbackend.service.NosService;
+import com.cfh.fatmeasurementsbackend.service.OssService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,8 +27,11 @@ public class AnimalDataServiceImpl implements AnimalDataService {
     @Autowired
     private AnimalDataRepository animalDataRepository;
 
+//    @Autowired
+//    private NosService nosService;
+
     @Autowired
-    private NosService nosService;
+    private OssService ossService;
 
     @Override
     public AnimalDataDto submitAnimalDataForm(AnimalDataFormDto animalDataFormDto) {
@@ -39,13 +43,12 @@ public class AnimalDataServiceImpl implements AnimalDataService {
          * 将表单中携带的B超数据上传到nos桶中
          */
         try {
-            Map<String, String> resultMap = nosService.uploadBUltrasonic2Nos(animalDataFormDto.getAnimalBUltrasound().getInputStream());
-            String url = resultMap.get("url");
-            String nosKey = resultMap.get("nos_key");
+            Map<String, String> resultMap = ossService.uploadBUltrasonic2Oss(animalDataFormDto.getAnimalBUltrasound().getInputStream());
+            // String url = resultMap.get("url");
+            String ossKey = resultMap.get("oss_key");
 
-            log.info("B超文件上传成功:{}", url);
-            animalData.setAnimalBUltrasound(url);
-            animalData.setNosKey(nosKey);
+            log.info("B超文件上传成功:{}", ossKey);
+            animalData.setNosKey(ossKey);
         } catch (IOException e) {
             e.printStackTrace();
             log.info("B超文件上传失败");

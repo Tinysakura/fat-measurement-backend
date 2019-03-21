@@ -7,9 +7,7 @@ import com.cfh.fatmeasurementsbackend.pojo.dto.AnimalResultDto;
 import com.cfh.fatmeasurementsbackend.pojo.vo.AnimalDetailVo;
 import com.cfh.fatmeasurementsbackend.service.AnimalDataService;
 import com.cfh.fatmeasurementsbackend.service.AnimalResultService;
-import com.cfh.fatmeasurementsbackend.service.NosService;
-import com.netease.cloud.services.nos.transfer.Download;
-import com.netease.cloud.services.nos.transfer.TransferManager;
+import com.cfh.fatmeasurementsbackend.service.OssService;
 import com.sun.javafx.binding.StringFormatter;
 import lombok.extern.slf4j.Slf4j;
 import org.redisson.api.RLock;
@@ -54,8 +52,11 @@ public class AnimalResultServiceImpl implements AnimalResultService {
     @Autowired
     private RedissonClient redissonClient;
 
+//    @Autowired
+//    private NosService nosService;
+
     @Autowired
-    private NosService nosService;
+    private OssService ossService;
 
     private static String resourcePath = System.getProperty("user.dir");
 
@@ -119,7 +120,7 @@ public class AnimalResultServiceImpl implements AnimalResultService {
         String downloadPath = resourcePath.concat("/src/main/resources/py/bmp").concat(bmp).concat(".BMP");
         try {
             log.info("将{}对应的B超文件下载到临时目录", animalDataId, downloadPath);
-            nosService.downloadBUltrasonicFromNos(downloadPath, animalData.getNosKey());
+            ossService.downloadBUltrasonicFromOss(downloadPath, animalData.getNosKey());
         } catch (IOException e) {
             log.info("{}对应的B超文件下载失败", animalDataId);
             e.printStackTrace();
