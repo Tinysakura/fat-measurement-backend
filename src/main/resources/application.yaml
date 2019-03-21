@@ -1,9 +1,18 @@
+# 网易对象存储服务nos
 nos:
   accessKey: 32af146fa7c0457fbe4345a98cc753ca
   secretKey: 16a9afdc8e5b4ac4bd483f2c75eb2fc0
   endPoint: nos-eastchina1.126.net
   bucket_head_portrait: bucket-head-portrait
   bucket_B_ultrasonic: bucket-B-ultrasonic
+
+# 阿里对象存储服务oss
+oss:
+  accessKey: LTAIGRZBvpO6FEsL
+  secretKey: uC8NnYIpmMd9TagI3rknYDdo5HiyQJ
+  endPoint: oss-cn-beijing.aliyuncs.com
+  bucket_head_portrait: bucket-head-portrait
+  bucket_B_ultrasonic: bucket-b-ultrasonic
 
 normal_corePoolSize: 10
 normal_maxPoolSize: 50
