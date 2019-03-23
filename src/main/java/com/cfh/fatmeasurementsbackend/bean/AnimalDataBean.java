@@ -22,7 +22,7 @@ public class AnimalDataBean {
     private AnimalDataService animalDataService;
 
     @PostMapping(value = "/a/submit/form/animal/data")
-    public ResponseView saveAnimalDataForm(@RequestParam("id") Long id,
+    public ResponseView saveAnimalDataForm(@RequestParam(value = "id", required = false) Long id,
                                            @RequestParam("animalId") String animalId,
                                            @RequestParam("animalWeight")BigDecimal animalWeight,
                                            @RequestParam("animalSex")Integer animalSex,
