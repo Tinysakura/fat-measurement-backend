@@ -1,5 +1,6 @@
 package com.cfh.fatmeasurementsbackend.service.impl;
 
+import com.cfh.fatmeasurementsbackend.constant.AnimalConstant;
 import com.cfh.fatmeasurementsbackend.dao.domain.AnimalData;
 import com.cfh.fatmeasurementsbackend.dao.repository.AnimalDataRepository;
 import com.cfh.fatmeasurementsbackend.pojo.dto.AnimalDataDto;
@@ -54,6 +55,7 @@ public class AnimalDataServiceImpl implements AnimalDataService {
             log.info("B超文件上传失败");
         }
 
+        animalData.setAnimalDraft(AnimalConstant.AnimalDraftEnum.DRAFT.getCode());
         AnimalData animalDataResult = animalDataRepository.save(animalData);
         AnimalDataDto animalDataDto = new AnimalDataDto();
 

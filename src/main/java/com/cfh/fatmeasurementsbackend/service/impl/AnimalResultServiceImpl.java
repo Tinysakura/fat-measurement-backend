@@ -1,6 +1,9 @@
 package com.cfh.fatmeasurementsbackend.service.impl;
 
+import com.cfh.fatmeasurementsbackend.constant.AnimalConstant;
+import com.cfh.fatmeasurementsbackend.dao.domain.AnimalData;
 import com.cfh.fatmeasurementsbackend.dao.domain.AnimalResult;
+import com.cfh.fatmeasurementsbackend.dao.repository.AnimalDataRepository;
 import com.cfh.fatmeasurementsbackend.dao.repository.AnimalResultRepository;
 import com.cfh.fatmeasurementsbackend.pojo.dto.AnimalDataDto;
 import com.cfh.fatmeasurementsbackend.pojo.dto.AnimalResultDto;
@@ -39,6 +42,9 @@ import java.util.stream.Collectors;
 public class AnimalResultServiceImpl implements AnimalResultService {
     @Autowired
     private AnimalResultRepository animalResultRepository;
+
+    @Autowired
+    private AnimalDataRepository animalDataRepository;
 
     @Autowired
     private AnimalDataService animalDataService;
@@ -157,8 +163,14 @@ public class AnimalResultServiceImpl implements AnimalResultService {
 
             /**
              * 保存计算结果到数据库
+             * 更新animal_data状态:draft -> measured
              */
             AnimalResult saveResult = animalResultRepository.save(animalResult);
+            AnimalData saveAnimalData = new AnimalData();
+            BeanUtils.copyProperties(animalData, saveAnimalData);
+            saveAnimalData.setAnimalDraft(AnimalConstant.AnimalDraftEnum.DRAFT.getCode());
+            animalDataRepository.save(saveAnimalData);
+
             BeanUtils.copyProperties(saveResult, animalResultDto);
 
             return animalResultDto;
