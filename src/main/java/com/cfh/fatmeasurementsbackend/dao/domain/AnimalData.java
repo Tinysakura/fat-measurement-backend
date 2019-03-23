@@ -38,12 +38,6 @@ public class AnimalData {
     private String nosKey;
 
     /**
-     * B超图片地址
-     */
-    @Column(name = "data_animal_b_ultrasound", columnDefinition = "TEXT")
-    private String animalBUltrasound;
-
-    /**
      * 测量动物编号
      */
     @Column(name = "data_animal_id", columnDefinition = "VARCHAR")

@@ -20,8 +20,6 @@ public class AnimalDataDto {
 
     private String nosKey;
 
-    private String animalBUltrasound;
-
     private String animalId;
 
     private BigDecimal animalWeight;
