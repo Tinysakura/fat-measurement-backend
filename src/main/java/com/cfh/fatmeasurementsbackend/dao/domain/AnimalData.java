@@ -34,7 +34,7 @@ public class AnimalData {
     @Column(name = "user_id")
     private Long userId;
 
-    @Column(name = "data_animal_nos_key", columnDefinition = "VARCHAR")
+    @Column(name = "data_animal_nos_key", columnDefinition = "TEXT")
     private String nosKey;
 
     /**
