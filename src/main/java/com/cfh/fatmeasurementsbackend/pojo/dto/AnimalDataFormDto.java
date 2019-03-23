@@ -19,7 +19,7 @@ public class AnimalDataFormDto {
 
     private String animalId;
 
-    private BigDecimal S;
+    private BigDecimal animalWeight;
 
     private Integer animalSex;
 
