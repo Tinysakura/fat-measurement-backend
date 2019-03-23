@@ -120,7 +120,7 @@ public class AnimalResultServiceImpl implements AnimalResultService {
          */
         AnimalDataDto animalData = animalDataService.getAnimalDataById(animalDataId);
         String bmp = animalData.getNosKey().concat(String.valueOf(UUID.randomUUID()));
-        String downloadPath = resourcePath.concat("/src/main/resources/py/bmp").concat(bmp).concat(".BMP");
+        String downloadPath = resourcePath.concat("/src/main/resources/py/bmp/").concat(bmp).concat(".BMP");
         try {
             log.info("将{}对应的B超文件下载到临时目录", animalDataId, downloadPath);
             ossService.downloadBUltrasonicFromOss(downloadPath, animalData.getNosKey());
@@ -181,8 +181,8 @@ public class AnimalResultServiceImpl implements AnimalResultService {
          */
         try {
             log.info("删除临时目录下的B超文件{}", downloadPath);
-            File file = new File(downloadPath);
-            file.delete();
+            // File file = new File(downloadPath);
+            // file.delete();
         } catch (Exception e) {
             e.printStackTrace();
         }
