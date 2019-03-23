@@ -119,8 +119,8 @@ public class AnimalResultServiceImpl implements AnimalResultService {
          * b超文件名为对应的nos-key加上uuid, 后缀为BMP, 统一保存在py文件所在路径的下级bmp路径下
          */
         AnimalDataDto animalData = animalDataService.getAnimalDataById(animalDataId);
-        String bmp = animalData.getNosKey().concat(String.valueOf(UUID.randomUUID()));
-        String downloadPath = resourcePath.concat("/src/main/resources/py/bmp/").concat(bmp).concat(".BMP");
+        String bmp = animalData.getNosKey();
+        String downloadPath = resourcePath.concat("/src/main/resources/py/bmp/").concat(bmp);
         try {
             log.info("将{}对应的B超文件下载到临时目录", animalDataId, downloadPath);
             ossService.downloadBUltrasonicFromOss(downloadPath, animalData.getNosKey());
@@ -144,13 +144,17 @@ public class AnimalResultServiceImpl implements AnimalResultService {
             BigDecimal backFat = null;
             BigDecimal fatRate = null;
 
-            try {
-                musculiOculi = musculiOculiFuture.get();
-                backFat = backFatFuture.get();
-                fatRate = fatRateFuture.get();
-            } catch (InterruptedException | ExecutionException e1) {
-                e1.printStackTrace();
-            }
+            // musculiOculi = measureMusculiOculi(bmp);
+            backFat = measureBackFat(bmp);
+            fatRate = measureFatRate(bmp);
+
+//            try {
+//                musculiOculi = musculiOculiFuture.get();
+//                backFat = backFatFuture.get();
+//                fatRate = fatRateFuture.get();
+//            } catch (InterruptedException | ExecutionException e1) {
+//                e1.printStackTrace();
+//            }
 
             animalResult.setAnimalDataId(animalDataId);
             animalResult.setBackFat(measureBackFat(bmp));
