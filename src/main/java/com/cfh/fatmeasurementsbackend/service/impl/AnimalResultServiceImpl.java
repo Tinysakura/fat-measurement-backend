@@ -200,7 +200,7 @@ public class AnimalResultServiceImpl implements AnimalResultService {
      */
     private BigDecimal measureMusculiOculi(String bmp) {
         String bmpFilePath = "./bmp/".concat(bmp);
-        String[] command = new String[]{"./1015.sh", "bmpFilePath"};
+        String[] command = new String[]{"./1015.sh", bmpFilePath};
 
         try {
             return new BigDecimal(invokeExternal(command));
