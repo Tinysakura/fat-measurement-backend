@@ -13,7 +13,7 @@ import java.math.BigDecimal;
  * @Date: 2019/3/13
  */
 @Entity
-@Table(name = "user")
+@Table(name = "animal_result")
 @EntityListeners(AuditingEntityListener.class)
 @Data
 public class AnimalResult {
