@@ -40,7 +40,7 @@ public class AnimalData {
     /**
      * B超图片地址
      */
-    @Column(name = "data_animal_b_ultrasound", columnDefinition = "VARCHAR")
+    @Column(name = "data_animal_b_ultrasound", columnDefinition = "TEXT")
     private String animalBUltrasound;
 
     /**
