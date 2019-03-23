@@ -1,3 +1,3 @@
 # !/bin/sh
 
-python 1017.py $1
+python3 1017.py $1
