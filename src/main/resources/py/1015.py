@@ -14,7 +14,7 @@ import sys
 def __CNN__():
     model = Sequential()#218*178*3
     # model.add(Conv2D(32, (3, 3), input_shape=(254, 309, 3)))
-    model.add(Conv2D(32, (3, 3), input_shape=(600, 800, 3)))
+    model.add(Conv2D(32, (3, 3), input_shape=(112, 249, 3)))
     model.add(Activation('relu'))
     model.add(MaxPooling2D(pool_size=(2, 2)))
 
@@ -66,9 +66,14 @@ width = len(imageData[0])
 #print(imageData.shape)
 #imageData = imageData.reshape(1,112, 249, 3)
 #print(imageData.shape)
-#imageData = preprocess_input(imageData)
-a = model1.predict(imageData,batch_size=1,verbose=0)
+# imageData = preprocess_input(imageData)
+# a = model1.predict(imageData,batch_size=1,verbose=0)
 #print(a)
+imageData = imageData[15:  127, 30 : width-30]
+imageData = imageData.reshape(1,112, 249, 3)
+#print(imageData.shape)
+a = model1.predict(imageData,batch_size=1,verbose=0)
+
 print(a[0][0])
 
 # f = open("out.txt",w)
