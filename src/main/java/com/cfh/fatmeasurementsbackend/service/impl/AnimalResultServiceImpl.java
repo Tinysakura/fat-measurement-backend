@@ -144,7 +144,7 @@ public class AnimalResultServiceImpl implements AnimalResultService {
             BigDecimal backFat = null;
             BigDecimal fatRate = null;
 
-            // musculiOculi = measureMusculiOculi(bmp);
+            musculiOculi = measureMusculiOculi(bmp);
             backFat = measureBackFat(bmp);
             fatRate = measureFatRate(bmp);
 
@@ -262,7 +262,10 @@ public class AnimalResultServiceImpl implements AnimalResultService {
         InputStreamReader inputStreamReader = new InputStreamReader(process.getInputStream());
         BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
 
-        String invokeResult = bufferedReader.readLine();
+        String invokeResult = null;
+        while (bufferedReader.readLine() != null) {
+            invokeResult = bufferedReader.readLine();
+        }
         log.info("command:{} invoke, result:{}", command, invokeResult);
 
         return invokeResult;
