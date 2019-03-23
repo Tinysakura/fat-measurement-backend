@@ -23,10 +23,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
@@ -257,22 +254,23 @@ public class AnimalResultServiceImpl implements AnimalResultService {
 
     private BigDecimal musculiOculiRevise(BigDecimal original) {
         // TODO 计算眼肌面积校正值
-        return null;
+        return original;
     }
 
     private BigDecimal backFatRevise(BigDecimal original) {
         // TODO 计算背膘厚度校正值
-        return null;
+        return original;
     }
 
     private BigDecimal caculateLeanRate() {
         // TODO 计算瘦肉率
-        return null;
+        return new BigDecimal(0.5);
     }
 
     private Integer caculateFatBalanceRank() {
         // TODO 计算脂肪均匀等级
-        return null;
+        int randomRank = (int)(1+Math.random()*(3));
+        return randomRank;
     }
 
     private  <R> R executorWithLock(String lockKey, Function<Object, R> function) {
