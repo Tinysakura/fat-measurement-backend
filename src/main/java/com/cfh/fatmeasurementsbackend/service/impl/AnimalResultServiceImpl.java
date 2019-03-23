@@ -144,17 +144,17 @@ public class AnimalResultServiceImpl implements AnimalResultService {
             BigDecimal backFat = null;
             BigDecimal fatRate = null;
 
-            musculiOculi = measureMusculiOculi(bmp);
-            backFat = measureBackFat(bmp);
-            fatRate = measureFatRate(bmp);
+//            musculiOculi = measureMusculiOculi(bmp);
+//            backFat = measureBackFat(bmp);
+//            fatRate = measureFatRate(bmp);
 
-//            try {
-//                musculiOculi = musculiOculiFuture.get();
-//                backFat = backFatFuture.get();
-//                fatRate = fatRateFuture.get();
-//            } catch (InterruptedException | ExecutionException e1) {
-//                e1.printStackTrace();
-//            }
+            try {
+                musculiOculi = musculiOculiFuture.get();
+                backFat = backFatFuture.get();
+                fatRate = fatRateFuture.get();
+            } catch (InterruptedException | ExecutionException e1) {
+                e1.printStackTrace();
+            }
 
             animalResult.setAnimalDataId(animalDataId);
             animalResult.setBackFat(measureBackFat(bmp));
