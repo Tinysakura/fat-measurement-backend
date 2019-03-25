@@ -57,7 +57,10 @@ public class AuthFilter implements Filter {
         /**
          * 如果cookie中没有则从header中获取
          */
-        webUser.setUserId(Long.valueOf(servletRequest.getHeader(CommonCookieKeyEnum.LOGIN_ID.getValue())));
+        if (servletRequest.getHeader(CommonCookieKeyEnum.LOGIN_ID.getValue()) != null) {
+            webUser.setUserId(Long.valueOf(servletRequest.getHeader(CommonCookieKeyEnum.LOGIN_ID.getValue())));
+        }
+
         return webUser;
     }
 
