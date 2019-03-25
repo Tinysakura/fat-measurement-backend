@@ -59,4 +59,16 @@ public class AnimalDataBean {
 
         return responseView;
     }
+
+    @GetMapping(value = "/a/query/user/animal/data")
+    public ResponseView getUserAnimalData() {
+        ResponseView responseView = new ResponseView();
+
+        responseView.setCode(ResponseCodeEnum.OK.getCode());
+        responseView.setMessage(ResponseCodeEnum.OK.getValue());
+
+        responseView.setResult(animalDataService.getAnimalDataByUserId(WebUser.getWebUser().getUserId()));
+
+        return responseView;
+    }
 }
