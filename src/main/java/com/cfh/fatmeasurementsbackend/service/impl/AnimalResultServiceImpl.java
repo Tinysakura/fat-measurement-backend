@@ -172,7 +172,7 @@ public class AnimalResultServiceImpl implements AnimalResultService {
             AnimalResult saveResult = animalResultRepository.save(animalResult);
             AnimalData saveAnimalData = new AnimalData();
             BeanUtils.copyProperties(animalData, saveAnimalData);
-            saveAnimalData.setAnimalDraft(AnimalConstant.AnimalDraftEnum.DRAFT.getCode());
+            saveAnimalData.setAnimalDraft(AnimalConstant.AnimalDraftEnum.NOT_DRAFT.getCode());
             animalDataRepository.save(saveAnimalData);
 
             BeanUtils.copyProperties(saveResult, animalResultDto);
