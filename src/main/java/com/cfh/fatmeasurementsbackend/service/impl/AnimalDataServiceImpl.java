@@ -52,7 +52,7 @@ public class AnimalDataServiceImpl implements AnimalDataService {
         /**
          * 使用用户id作为锁，用户只能同时上传一个数据表单
          */
-        AnimalDataDto result = RedissionUtil.executorWithLock(redissonClient, WebUser.getWebUser().getUserId(), e -> {
+        AnimalDataDto result = RedissionUtil.executorWithLock(redissonClient, String.valueOf(WebUser.getWebUser().getUserId()), e -> {
             AnimalData animalData = new AnimalData();
             AnimalData originalData = null;
 
@@ -74,8 +74,8 @@ public class AnimalDataServiceImpl implements AnimalDataService {
 
                     log.info("B超文件上传成功:{}", ossKey);
                     animalData.setNosKey(ossKey);
-                } catch (IOException e) {
-                    e.printStackTrace();
+                } catch (IOException e1) {
+                    e1.printStackTrace();
                     log.info("B超文件上传失败");
                 }
             } else {
