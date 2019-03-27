@@ -42,4 +42,15 @@ public class AnimalResultBean {
 
         return responseView;
     }
+
+    @GetMapping("/a/query/appoint/result")
+    public ResponseView queryFatAnalyzeResultByAnimalDataId(@RequestParam(value = "animalDataId") Long animalDataId) {
+        ResponseView responseView = new ResponseView();
+
+        responseView.setCode(ResponseCodeEnum.OK.getCode());
+        responseView.setMessage(ResponseCodeEnum.OK.getValue());
+        responseView.setResult(animalResultService.getAnimalResultByAnimalDataId(animalDataId));
+
+        return responseView;
+    }
 }
