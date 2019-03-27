@@ -11,6 +11,7 @@ import com.cfh.fatmeasurementsbackend.pojo.vo.AnimalDetailVo;
 import com.cfh.fatmeasurementsbackend.service.AnimalDataService;
 import com.cfh.fatmeasurementsbackend.service.AnimalResultService;
 import com.cfh.fatmeasurementsbackend.service.OssService;
+import com.cfh.fatmeasurementsbackend.util.RedissionUtil;
 import com.sun.javafx.binding.StringFormatter;
 import lombok.extern.slf4j.Slf4j;
 import org.redisson.api.RLock;
@@ -131,7 +132,7 @@ public class AnimalResultServiceImpl implements AnimalResultService {
             e.printStackTrace();
         }
 
-        AnimalResultDto result = executorWithLock(lockKey, e -> {
+        AnimalResultDto result = RedissionUtil.executorWithLock(redissonClient, lockKey, e -> {
             AnimalResultDto animalResultDto = new AnimalResultDto();
             AnimalResult animalResult = new AnimalResult();
 
@@ -292,25 +293,5 @@ public class AnimalResultServiceImpl implements AnimalResultService {
         // TODO 计算脂肪均匀等级
         int randomRank = (int)(1+Math.random()*(3));
         return randomRank;
-    }
-
-    private  <R> R executorWithLock(String lockKey, Function<Object, R> function) {
-        RLock rLock = redissonClient.getLock(lockKey);
-        try {
-            boolean lock = rLock.tryLock(1000, TimeUnit.MILLISECONDS);
-            if (lock) {
-                log.info("获取到分布式锁:{}", lockKey);
-                return function.apply(lockKey);
-            }
-
-        } catch (InterruptedException e) {
-            log.info("发生异常，释放分布式锁:{}", lockKey);
-            rLock.unlock();
-            e.printStackTrace();
-        } finally {
-            rLock.unlock();
-        }
-
-        return null;
     }
 }
