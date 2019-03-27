@@ -37,8 +37,14 @@ public class AnimalDataServiceImpl implements AnimalDataService {
     @Override
     public AnimalDataDto submitAnimalDataForm(AnimalDataFormDto animalDataFormDto) {
         AnimalData animalData = new AnimalData();
+        AnimalData originalData = null;
 
         BeanUtils.copyProperties(animalDataFormDto, animalData);
+
+        Long id = animalDataFormDto.getId();
+        if (id != null) {
+            originalData = animalDataRepository.getById(animalDataFormDto.getId());
+        }
 
         /**
          * 将表单中携带的B超数据上传到nos桶中
@@ -55,6 +61,8 @@ public class AnimalDataServiceImpl implements AnimalDataService {
                 e.printStackTrace();
                 log.info("B超文件上传失败");
             }
+        } else {
+            animalData.setNosKey(originalData.getNosKey());
         }
 
         animalData.setAnimalDraft(AnimalConstant.AnimalDraftEnum.DRAFT.getCode());
