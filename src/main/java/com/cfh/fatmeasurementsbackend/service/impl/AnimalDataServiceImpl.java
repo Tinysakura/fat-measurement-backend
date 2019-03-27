@@ -43,16 +43,18 @@ public class AnimalDataServiceImpl implements AnimalDataService {
         /**
          * 将表单中携带的B超数据上传到nos桶中
          */
-        try {
-            Map<String, String> resultMap = ossService.uploadBUltrasonic2Oss(animalDataFormDto.getAnimalBUltrasound().getInputStream());
-            // String url = resultMap.get("url");
-            String ossKey = resultMap.get("oss_key");
+        if (animalDataFormDto.getAnimalBUltrasound() != null) {
+            try {
+                Map<String, String> resultMap = ossService.uploadBUltrasonic2Oss(animalDataFormDto.getAnimalBUltrasound().getInputStream());
+                // String url = resultMap.get("url");
+                String ossKey = resultMap.get("oss_key");
 
-            log.info("B超文件上传成功:{}", ossKey);
-            animalData.setNosKey(ossKey);
-        } catch (IOException e) {
-            e.printStackTrace();
-            log.info("B超文件上传失败");
+                log.info("B超文件上传成功:{}", ossKey);
+                animalData.setNosKey(ossKey);
+            } catch (IOException e) {
+                e.printStackTrace();
+                log.info("B超文件上传失败");
+            }
         }
 
         animalData.setAnimalDraft(AnimalConstant.AnimalDraftEnum.DRAFT.getCode());

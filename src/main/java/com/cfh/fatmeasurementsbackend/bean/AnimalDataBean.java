@@ -27,7 +27,7 @@ public class AnimalDataBean {
                                            @RequestParam("animalWeight")BigDecimal animalWeight,
                                            @RequestParam("animalSex")Integer animalSex,
                                            @RequestParam("animalVariety")Integer animalVariety,
-                                           @RequestParam("animalBUltrasound")MultipartFile animalBUltrasound) {
+                                           @RequestParam(value = "animalBUltrasound", required = false)MultipartFile animalBUltrasound) {
         AnimalDataFormDto animalDataFormDto = new AnimalDataFormDto();
 
         WebUser webUser = WebUser.getWebUser();
