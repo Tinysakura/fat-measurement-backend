@@ -74,7 +74,9 @@ public class AnimalResultServiceImpl implements AnimalResultService {
 
         AnimalResult animalResult = animalResultRepository.getAnimalResultByAnimalDataId(animalDataId);
 
-        BeanUtils.copyProperties(animalResult, animalResultDto);
+        if (animalResult != null) {
+            BeanUtils.copyProperties(animalResult, animalResultDto);
+        }
 
         return animalResultDto;
     }
