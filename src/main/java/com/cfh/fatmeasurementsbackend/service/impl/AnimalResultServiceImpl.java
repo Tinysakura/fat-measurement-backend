@@ -67,6 +67,8 @@ public class AnimalResultServiceImpl implements AnimalResultService {
 
     private String distributedKeyFormat = "animal_data_measure_key_%s";
 
+    private String bmpBaseDir = "/Users/chenfeihao/Desktop/tmp/bmp/";
+
     @Override
     public AnimalResultDto getAnimalResultByAnimalDataId(Long animalDataId) {
         AnimalResultDto animalResultDto = new AnimalResultDto();
@@ -124,8 +126,7 @@ public class AnimalResultServiceImpl implements AnimalResultService {
         File sourceFile = null;
         try {
             log.info("将{}对应的B超文件下载到临时目录", animalDataId, "classpath:".concat(bmp));
-            org.springframework.core.io.Resource resource = new ClassPathResource("py/bmp/".concat(bmp));
-            sourceFile =  resource.getFile();
+            sourceFile =  new File(bmpBaseDir.concat(bmp));
             ossService.downloadBUltrasonicFromOss(sourceFile, animalData.getNosKey());
         } catch (IOException e) {
             log.info("{}对应的B超文件下载失败", animalDataId);
@@ -205,7 +206,7 @@ public class AnimalResultServiceImpl implements AnimalResultService {
      * @return
      */
     private BigDecimal measureMusculiOculi(String bmp) {
-        String bmpFilePath = "./bmp/".concat(bmp);
+        String bmpFilePath = bmpBaseDir.concat(bmp);
         String[] command = new String[]{"./1015.sh", bmpFilePath};
 
         try {
@@ -222,7 +223,7 @@ public class AnimalResultServiceImpl implements AnimalResultService {
      * @return
      */
     private BigDecimal measureBackFat(String bmp) {
-        String bmpFilePath = "./bmp/".concat(bmp);
+        String bmpFilePath = bmpBaseDir.concat(bmp);
         String[] command = new String[]{"./1016.sh", bmpFilePath};
 
         try {
@@ -239,7 +240,7 @@ public class AnimalResultServiceImpl implements AnimalResultService {
      * @return
      */
     private BigDecimal measureFatRate(String bmp) {
-        String bmpFilePath = "./bmp/".concat(bmp);
+        String bmpFilePath = bmpBaseDir.concat(bmp);
         String[] command = new String[]{"./1017.sh", bmpFilePath};
 
         try {
