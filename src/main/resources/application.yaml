@@ -17,6 +17,7 @@ oss:
 normal_corePoolSize: 10
 normal_maxPoolSize: 50
 
+
 spring:
   application:
     name: fat-measurements-backend
@@ -39,3 +40,6 @@ spring:
   redis:
     host: localhost
     port: 6379
+
+server:
+  port: 8888
