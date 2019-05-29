@@ -69,6 +69,8 @@ public class AnimalResultServiceImpl implements AnimalResultService {
 
     private String bmpBaseDir = "/Users/chenfeihao/Desktop/tmp/bmp/";
 
+    private String pythonBaseDir = "/Users/chenfeihao/Desktop/tmp/py/";
+
     @Override
     public AnimalResultDto getAnimalResultByAnimalDataId(Long animalDataId) {
         AnimalResultDto animalResultDto = new AnimalResultDto();
@@ -265,9 +267,7 @@ public class AnimalResultServiceImpl implements AnimalResultService {
 
     private String invokeExternal(String[] command) throws IOException {
         // 改变当前目录执行shell脚本
-        org.springframework.core.io.Resource resource = new ClassPathResource("py");
-        File sourceFile =  resource.getFile();
-        Process process = Runtime.getRuntime().exec(command, null, sourceFile);
+        Process process = Runtime.getRuntime().exec(command, null, new File(pythonBaseDir));
         InputStreamReader inputStreamReader = new InputStreamReader(process.getInputStream());
         BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
 
