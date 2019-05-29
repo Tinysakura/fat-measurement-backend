@@ -253,7 +253,7 @@ public class AnimalResultServiceImpl implements AnimalResultService {
 
     @Override
     public void testInvokeExternal() {
-        log.info("resourcePath:{}", resourcePath);
+        // log.info("resourcePath:{}", resourcePath);
 
         try {
             invokeExternal(new String[]{"./test.sh", "陈飞豪"});
