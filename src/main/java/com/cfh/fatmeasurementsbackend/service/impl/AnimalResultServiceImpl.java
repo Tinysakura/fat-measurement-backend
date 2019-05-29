@@ -14,10 +14,10 @@ import com.cfh.fatmeasurementsbackend.service.OssService;
 import com.cfh.fatmeasurementsbackend.util.RedissionUtil;
 import com.sun.javafx.binding.StringFormatter;
 import lombok.extern.slf4j.Slf4j;
-import org.redisson.api.RLock;
 import org.redisson.api.RedissonClient;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.stereotype.Service;
 
@@ -27,11 +27,11 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.math.BigDecimal;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
-import java.util.concurrent.TimeUnit;
-import java.util.function.Function;
 import java.util.stream.Collectors;
 
 /**
@@ -61,8 +61,6 @@ public class AnimalResultServiceImpl implements AnimalResultService {
 
     @Autowired
     private OssService ossService;
-
-    private static String resourcePath = System.getProperty("user.dir");
 
     @Resource(name = "normalThreadPoolTaskExecutor")
     private ThreadPoolTaskExecutor threadPoolTaskExecutor;
@@ -123,10 +121,12 @@ public class AnimalResultServiceImpl implements AnimalResultService {
          */
         AnimalDataDto animalData = animalDataService.getAnimalDataById(animalDataId);
         String bmp = animalData.getNosKey();
-        String downloadPath = resourcePath.concat("/src/main/resources/py/bmp/").concat(bmp);
+        File sourceFile = null;
         try {
-            log.info("将{}对应的B超文件下载到临时目录", animalDataId, downloadPath);
-            ossService.downloadBUltrasonicFromOss(downloadPath, animalData.getNosKey());
+            log.info("将{}对应的B超文件下载到临时目录", animalDataId, "classpath:".concat(bmp));
+            org.springframework.core.io.Resource resource = new ClassPathResource("py/bmp/".concat(bmp));
+            sourceFile =  resource.getFile();
+            ossService.downloadBUltrasonicFromOss(sourceFile, animalData.getNosKey());
         } catch (IOException e) {
             log.info("{}对应的B超文件下载失败", animalDataId);
             e.printStackTrace();
@@ -187,9 +187,12 @@ public class AnimalResultServiceImpl implements AnimalResultService {
          * 删除临时目录下下载的B超文件
          */
         try {
-            log.info("删除临时目录下的B超文件{}", downloadPath);
-             File file = new File(downloadPath);
-             file.delete();
+            log.info("删除临时目录下的B超文件{}", "classpath:".concat(bmp));
+            try {
+                sourceFile.delete();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -261,7 +264,9 @@ public class AnimalResultServiceImpl implements AnimalResultService {
 
     private String invokeExternal(String[] command) throws IOException {
         // 改变当前目录执行shell脚本
-        Process process = Runtime.getRuntime().exec(command, null, new File(resourcePath.concat("/src/main/resources/py")));
+        org.springframework.core.io.Resource resource = new ClassPathResource("py");
+        File sourceFile =  resource.getFile();
+        Process process = Runtime.getRuntime().exec(command, null, sourceFile);
         InputStreamReader inputStreamReader = new InputStreamReader(process.getInputStream());
         BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
 

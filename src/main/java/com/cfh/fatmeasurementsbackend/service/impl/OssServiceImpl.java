@@ -72,9 +72,7 @@ public class OssServiceImpl implements OssService {
     }
 
     @Override
-    public void downloadBUltrasonicFromOss(String downloadPath, String ossKey) throws IOException {
-        File file = new File(downloadPath);
-
+    public void downloadBUltrasonicFromOss(File file, String ossKey) throws IOException {
         ossClient.getObject(new GetObjectRequest(ossBucketBUltrasonic, ossKey), file);
     }
 

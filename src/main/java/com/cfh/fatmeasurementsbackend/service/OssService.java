@@ -1,5 +1,6 @@
 package com.cfh.fatmeasurementsbackend.service;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Map;
@@ -14,5 +15,5 @@ public interface OssService {
 
     Map<String, String> uploadBUltrasonic2Oss(InputStream inputStream) throws IOException;
 
-    void downloadBUltrasonicFromOss(String downloadPath, String ossKey) throws IOException;
+    void downloadBUltrasonicFromOss(File file, String ossKey) throws IOException;
 }
